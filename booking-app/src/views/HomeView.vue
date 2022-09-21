@@ -1,7 +1,7 @@
 <template>
   <div class="hero-container d-flex justify-center align-center flex-column flex-wrap">
     <h1> Welcome </h1>
-    <h5 class="my-5"> Roses and Notes Photography Booking System </h5>
+    <h5 class="mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
     <div class="button-container">
       <v-btn
           elevation="1"
