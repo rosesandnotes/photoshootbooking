@@ -52,15 +52,15 @@
 }
 
 .secondary-btn{
-  background-color: transparent;
+  background-color: #F4F4F450;
+  // opacity: 0.6;
   color: $primary-color;
-  border: thin solid $primary-color;
+  // border: thin solid $primary-color;
   transition: 0.3s;
-  &:hover{
-    background-color: $primary-color;
-    opacity: 0.5;
-    color: $white-color;
-  }
+  // &:hover{
+  //   background-color: $primary-color;
+  //   color: $white-color;
+  // }
 }
 
 h5{
