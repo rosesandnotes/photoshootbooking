@@ -1,0 +1,33 @@
+$primary-color: #BB679D;
+$secondary-color: #571B41;
+$tertiary-color:#E695C9;
+$greyish-color: #D6D3D5;
+$white-color: #F4F4F4;
+$black-color: #40383D;
+
+@mixin h1-primary {
+  h1{
+    color: $primary-color;
+    font-size: 6rem;
+    line-height: 7.75rem;
+    font-weight: 300;
+  }
+}
+
+@mixin h5-secondary {
+  h5{
+    color: $secondary-color;
+    font-size: 2rem;
+    line-height: 2.75rem;
+    font-weight: 400;
+  }
+}
+
+@mixin paragraph-secondary {
+  p{
+    color: $secondary-color;
+    font-size: 0.875rem;
+    line-height: 1.31rem;
+    font-weight: 400;
+  }
+}
