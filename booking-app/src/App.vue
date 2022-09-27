@@ -23,4 +23,9 @@ export default {
 * {
   font-family: 'Lato', sans-serif;
 }
+
+.v-main {
+  min-height: 90vh;
+  width: 100vw;
+}
 </style>

@@ -5,14 +5,14 @@
         <v-col class="lef-menu  d-flex justify-start align-center "> 
           <router-link to="/" class="mr-8"> <div class="logo-container"></div>  </router-link>
           <ul class="d-flex  align-center">
-            <li class="mr-6 d-flex  align-center"> <router-link to="/" > <p> Home </p>  </router-link> </li>  
-            <li> <router-link to="/bookings" > <p> Bookings </p>  </router-link> </li>  
+            <li class="mr-6 d-flex  align-center"> <router-link to="/" > <p class="p1 p1-secondary"> Home </p>  </router-link> </li>  
+            <li> <router-link to="/bookings" > <p class="p1 p1-secondary"> Bookings </p>  </router-link> </li>  
           </ul>
         </v-col>
         <v-col class="right-menu d-flex justify-end align-center"> 
           <ul class="d-flex  align-center">
-            <li class="mr-6 d-flex  align-center" > <router-link to="/search" > <p> Search </p>  </router-link> </li>
-            <li> <router-link to="/login" > <p> Login </p>  </router-link> </li>
+            <li class="mr-6 d-flex  align-center" > <router-link to="/search" > <p class="p1 p1-secondary"> Search </p>  </router-link> </li>
+            <li> <router-link to="/login" > <p class="p1 p1-secondary"> Login </p>  </router-link> </li>
           </ul>
         </v-col>
       </v-row>
@@ -28,11 +28,11 @@
 <style lang="scss">
 
 @import "../assets/shared";
-@include paragraph-secondary;
+@include p;
 
 .navigation-container{
   background-color: $greyish-color;
-  height: 90px;
+  height: 10vh;
 }
 
 .navigation{

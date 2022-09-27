@@ -1,23 +1,26 @@
 <template>
   <div class="hero-container d-flex justify-center align-center flex-column flex-wrap">
-    <h1> Welcome </h1>
-    <h5 class="mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
+    <h1 class="h1-primary"> Welcome </h1>
+    <h5 class="h5-secondary mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
     <div class="button-container">
-      <v-btn
+      <router-link to="/login">
+        <v-btn
           elevation="1"
           large
           tile
         class="primary-btn btn mr-5"> 
         Login
       </v-btn>
-
-      <v-btn
-        class="secondary-btn btn"
-        elevation="1"
-        large
-        outlined
-        tile
-      >View Bookings</v-btn>
+      </router-link>
+      <router-link to="/bookings">
+        <v-btn
+          class="secondary-btn btn"
+          elevation="1"
+          large
+          outlined
+          tile
+        >View Bookings</v-btn>
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,39 +31,17 @@
 
 <style lang="scss" scoped>
 @import "../assets/shared";
-@include h1-primary;
-@include h5-secondary;
+@include h1;
+@include h5;
+@include btn;
 
 .hero-container{
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
   background-image: url("../assets/images/hero.jpg");
   background-size: cover;
   background-position: center ;
   background-repeat: no-repeat;
-}
-
-.btn{
-  width: 175px;
-  height: 42px;
-  border-radius: 0;
-}
-
-.primary-btn{
-  background-color: $primary-color;
-  color: $white-color;
-}
-
-.secondary-btn{
-  background-color: #F4F4F450;
-  // opacity: 0.6;
-  color: $primary-color;
-  // border: thin solid $primary-color;
-  transition: 0.3s;
-  // &:hover{
-  //   background-color: $primary-color;
-  //   color: $white-color;
-  // }
 }
 
 h5{

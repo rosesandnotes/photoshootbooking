@@ -2,11 +2,14 @@ $primary-color: #BB679D;
 $secondary-color: #571B41;
 $tertiary-color:#E695C9;
 $greyish-color: #D6D3D5;
+$greyish-color-opacity40: #D6D3D540;
+$greyish-color-opacity80: #D6D3D580;
 $white-color: #F4F4F4;
 $black-color: #40383D;
 
-@mixin h1-primary {
-  h1{
+
+@mixin h1 {
+  .h1-primary {
     color: $primary-color;
     font-size: 6rem;
     line-height: 7.75rem;
@@ -14,20 +17,95 @@ $black-color: #40383D;
   }
 }
 
-@mixin h5-secondary {
+@mixin h4 {
+  h4{
+    font-size: 3rem;
+    line-height: 3.75rem;
+    font-weight: 400;
+  }
+
+  .h4-primary {
+    color: $primary-color;
+  }
+
+  .h4-black {
+    color: $black-color;
+  }
+}
+
+
+@mixin h5 {
   h5{
-    color: $secondary-color;
     font-size: 2rem;
     line-height: 2.75rem;
     font-weight: 400;
   }
+
+  .h5-secondary {
+    color: $secondary-color;
+    
+  }
+
+  .h5-black {
+    color: $black-color;
+  }
 }
 
-@mixin paragraph-secondary {
+@mixin p {
   p{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+  }
+
+  .p-secondary {
     color: $secondary-color;
+  }
+
+  .p-black{
+    color: $black-color;
+  }
+
+  .p-black-bold{
+    color: $black-color;
+    font-weight: 700;
+  }
+
+  .p1{
     font-size: 0.875rem;
     line-height: 1.31rem;
     font-weight: 400;
+  }
+
+  .p1-black-bold{
+    color: $black-color;
+    font-weight: 700;
+  }
+
+  .p1-primary{
+    color: $primary-color;
+  }
+
+  .p1-secondary{
+    color: $secondary-color;
+  }
+}
+
+@mixin btn {
+  .btn{
+    min-width: 175px;
+    height: 42px;
+    border-radius: 0;
+  }
+
+  .primary-btn{
+    background-color: $primary-color;
+    color: $white-color;
+  }
+
+  .secondary-btn{
+    background-color: #F4F4F450;
+    color: $primary-color;
+    transition: 0.3s;
   }
 }
