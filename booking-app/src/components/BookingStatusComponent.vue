@@ -1,18 +1,18 @@
 <template>
-   <div class="booking-status-container d-flex flex-wrap">
-        <div class="booking-status all-bookings-container me-9 active">
+   <div class="booking-status-container d-flex">
+        <div class="booking-status all-bookings-container btn-rounded btn-rounded-greyish me-9 btn-rounded-active">
           <p class="p-black-bold ">All Bookings</p>
         </div>
-        <div class="booking-status pending-container me-9">
+        <div class="booking-status pending-container btn-rounded btn-rounded-greyish me-9">
           <p class="p-black-bold">Pending</p>
         </div>
-        <div class="booking-status confirmed-container me-9">
+        <div class="booking-status confirmed-container btn-rounded btn-rounded-greyish me-9">
           <p class="p-black-bold">Confirmed</p>
         </div>
-        <div class="booking-status done-container me-9">
+        <div class="booking-status done-container btn-rounded btn-rounded-greyish me-9">
           <p class="p-black-bold">Done</p>
         </div>
-        <div class="booking-status canceled-container">
+        <div class="booking-status canceled-container btn-rounded btn-rounded-greyish">
           <p class="p-black-bold">Canceled</p>
         </div>
       </div>
@@ -25,20 +25,10 @@
 <style lang="scss" scoped>
 @import "../assets/shared";
 @include p;
+@include btn;
 
 .booking-status{
-  background-color: $greyish-color-opacity40;
-  color: $greyish-color-opacity40;
-  padding: 10px 20px;
-  border-radius: 20px;
   cursor: pointer;
-  &:hover{
-    background-color: $greyish-color-opacity80;
-    color: $primary-color;
-  } 
 }
 
-.active{
-    border: 1px solid $primary-color;
-  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-   <div class="booking-count-container d-flex flex-wrap">
+   <div class="booking-count-container d-flex">
         <div class="total-bookings-container me-9 d-flex flex-column justify-center align-center">
           <p class="p-black">Total Bookings</p>
           <h4 class="h4-black">28</h4>

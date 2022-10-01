@@ -26,6 +26,8 @@ export default {
 
 .v-main {
   min-height: 90vh;
-  width: 100vw;
+  min-width: 100vw;
+
+  overflow: scroll;
 }
 </style>

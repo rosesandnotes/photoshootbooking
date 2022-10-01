@@ -1,23 +1,23 @@
 <template>
-  <v-row class="d-flex justify-center align-center flex-wrap">
-      <v-col class="d-flex align-center">
-        <p class="p1-black-bold  me-2">booking #</p>
+  <v-row class="d-flex justify-start align-center flex-nowrap">
+      <v-col class="d-flex align-center me-2" cols="2" >
+        <p class="p1-black-bold me-4">booking #</p>
         <v-icon>mdi-sort</v-icon>
       </v-col>
-      <v-col>
+      <v-col cols="2">
         <p class="p1-black-bold">status</p> 
       </v-col>
-      <v-col>
+      <v-col cols="2">
         <p class="p1-black-bold">type</p> 
       </v-col>
-      <v-col>
+      <v-col cols="2">
         <p class="p1-black-bold">client</p> 
       </v-col>
-      <v-col class="d-flex align-center me-4">
+      <v-col class="d-flex align-center me-4" cols="2" >
         <p class="p1-black-bold me-2">photoshoot date</p> 
         <v-icon>mdi-sort</v-icon>
       </v-col>
-      <v-col>
+      <v-col cols="2" >
 
       </v-col>
   </v-row>
