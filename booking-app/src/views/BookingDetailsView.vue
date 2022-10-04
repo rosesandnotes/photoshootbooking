@@ -1,5 +1,5 @@
 <template>
-  <div class="bookingdetailsview-container my-9 ">
+  <div class="bookingdetailsview-container my-16 ">
     <v-container>
       <v-row class="btn-container d-flex align-center mb-16">
           <a href="" class="me-9">
@@ -24,7 +24,7 @@
             <h6 class="h6-bold pb-4">
               Additional Notes
           </h6>
-          <textarea name="" id="" cols="100" rows="10" disabled>
+          <textarea name="" disabled>
             This is an example note
 
           </textarea>
@@ -79,6 +79,8 @@ textarea{
   background-color: $greyish-color-opacity40;
   border: 1px solid $greyish-color;
   resize: none;
+  min-height: 200px;
+  min-width: 100%;
 }
 
 .v-icon, .v-btn{

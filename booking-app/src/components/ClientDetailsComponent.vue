@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="row-underline pb-2">
+        <v-row class="row-underline pb-2">
           <h6 class="h6-bold">
             Client Details
           </h6>
@@ -27,8 +27,8 @@
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
-                  <p class="p1 p1-black item-label">Photoshoot Time</p>
-                  <p class="p-black">7:00 AM</p>
+                  <p class="p1 p1-black item-label">Photoshoot Date and Time</p>
+                  <p class="p-black">October 2, 2022, 7:00 AM</p>
                 </v-col>
               </v-row>
             </v-col>  

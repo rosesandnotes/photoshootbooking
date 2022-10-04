@@ -23,7 +23,7 @@
           ></v-text-field>
           <v-btn
             class="mr-4 btn primary-btn"
-            @click="submit"
+            @click.prevent="submit"
           >
             Login
           </v-btn>
