@@ -13,6 +13,7 @@
           <ul class="d-flex  align-center">
             <li class="mr-6 d-flex  align-center" > <router-link to="/search" > <p class="p1 p1-secondary"> Search </p>  </router-link> </li>
             <li> <router-link to="/login" > <p class="p1 p1-secondary"> Login </p>  </router-link> </li>
+            <li> <router-link to="/" > <p class="p1 p1-secondary"> Logout </p>  </router-link> </li>
           </ul>
         </v-col>
       </v-row>

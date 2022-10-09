@@ -7,16 +7,26 @@
   </v-app>
 </template>
 
-<script>
+<script setup>
+//import {ref, onMounted} from 'vue';
+//import {getAuth, onAuthStateChanged} from 'firebase/auth';
+// import useUsers from '@/modules/useUsers';
 import NavComponent from './components/NavComponent.vue';
 
-export default {
-    name: "App",
-    data: () => ({
-    //
-    }),
-    components: { NavComponent }
-}
+// const {logout} = useUsers();
+//const isLoggedIn = ref(false);
+/* 
+onMounted(() => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  });
+}); */
+
 </script>
 
 <style lang="scss">

@@ -23,7 +23,7 @@
           ></v-text-field>
           <v-btn
             class="mr-4 btn primary-btn"
-            @click.prevent="submit"
+            @click.prevent="login()"
           >
             Login
           </v-btn>
@@ -35,7 +35,9 @@
 </template>
 
 <script setup>
+// import useUsers from '@/modules/useUsers';
 
+// const { login, email, password } = useUsers();
 
 </script>
 
