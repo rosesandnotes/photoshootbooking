@@ -2,19 +2,20 @@
   <div class="bookingdetailsview-container my-16 ">
     <v-container>
       <v-row class="btn-container d-flex align-center mb-16">
-          <a href="" class="me-9">
+          <a href="/bookings" class="me-9">
               <v-icon class="left-arrow"> mdi-arrow-left</v-icon> 
             </a>
             <h5 class="me-9">
-              Booking #28
+              Booking ID: {{ $route.params.id }}
             </h5>
             <div class="booking-status btn-rounded btn-rounded-black ">
-            <p class="p-black-boldld ">Confirmed</p>
+            <p class="p-black-boldld "> {{bookingItem.status}} </p>
           </div>
       </v-row>
       
-     <ClientDetailsComponent class="mb-9"/>
-     <PhotoshootDetailsComponent class="mb-9"/>
+
+      <ClientDetailsComponent :clientdetails="bookingItem.clientdetails" class="mb-9"/>
+     <PhotoshootDetailsComponent :bookingdetails="bookingItem.bookingdetails" class="mb-9"/>
 
      <v-row class="mb-9">
         <v-col
@@ -24,10 +25,18 @@
             <h6 class="h6-bold pb-4">
               Additional Notes
           </h6>
-          <textarea name="" disabled>
-            This is an example note
+       
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            v-model="bookingItem.bookingdetails"
+            disabled
 
-          </textarea>
+          ></textarea>
+
+
         </v-col>
      </v-row>
 
@@ -59,6 +68,26 @@
 <script setup>
 import ClientDetailsComponent from "../components/ClientDetailsComponent.vue";
 import PhotoshootDetailsComponent from "../components/PhotoshootDetailsComponent.vue";
+
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+import useBookings from '@/modules/useBookings';
+
+const {
+  getBookingItem,
+  bookingItem,
+} = useBookings()
+
+const route = useRoute();
+
+onMounted(() => {
+  console.log("route params id: ",route.params.id);
+  getBookingItem(route.params.id);
+  console.log("BookingDetails View - bookingItem: ",bookingItem)
+});
+
+
+
 </script>
 
 <style lang="scss" scoped>

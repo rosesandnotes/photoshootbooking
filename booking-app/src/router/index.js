@@ -28,6 +28,12 @@ const routes = [
     props: true
   },
   {
+    path: '/edit/:id',
+    name: 'edit ',
+    component: () => import('../views/BookingItemEditView.vue'),
+    props: true
+  },
+  {
     path: '/add',
     name: 'add ',
     component: () => import('../views/AddBookingView.vue')

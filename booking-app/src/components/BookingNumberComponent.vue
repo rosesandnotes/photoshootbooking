@@ -9,7 +9,7 @@
           <h4 class="h4-black">12</h4>
         </div>
         <div class="outdoor-bookings-container me-9 d-flex flex-column justify-center align-center">
-          <p class="p-black">Outdoor</p>
+          <p class="p-black">Outdoor Portrait</p>
           <h4 class="h4-black">10</h4>
         </div>
         <div class="holiday-bookings-container d-flex flex-column justify-center align-center">

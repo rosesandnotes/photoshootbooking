@@ -1,6 +1,24 @@
 <template>
   <div>
     <v-container class="mt-16 mb-9">
+      <v-snackbar
+                  v-model="snackbar"
+                  :multi-line="multiLine"
+                
+                >
+                You have added a new post.
+
+                  <template v-slot:action="{ attrs }">
+                    <v-btn
+                      color="red"
+                      text
+                      v-bind="attrs"
+                      @click="snackbar = false"
+                    >
+                      Close
+                    </v-btn>
+                  </template>
+                </v-snackbar>
       <v-row class="page-title-container mb-16">
         <v-col
         cols="12"
@@ -19,7 +37,9 @@
       </v-row>
       <v-row class="mt-3">
         <v-col cols="12" class="form-container">
-          <v-form>
+          <v-form
+         
+          >
             <v-row>
               <v-col
                   cols="12"
@@ -32,6 +52,7 @@
                 dense
                 required
                 class="inputfield"
+                v-model= "AddItemData.firstname"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -43,7 +64,7 @@
                 <v-text-field
                 label="Last Name"
                 placeholder="Last Name"
-                
+                v-model="AddItemData.lastname"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -55,7 +76,7 @@
                 <v-text-field
                 label="Address"
                 placeholder="Address"
-                
+                v-model="AddItemData.address"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -67,6 +88,7 @@
                 <v-text-field 
                 label="Phone Number"
                 placeholder="Phone Number"
+                v-model="AddItemData.contactnumber"
               ></v-text-field>
 
                 </v-col>
@@ -80,6 +102,7 @@
                 label="Email"
                 type="email"
                 placeholder="Email"
+                v-model="AddItemData.email"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -96,7 +119,9 @@
       </v-row>
       <v-row class="mt-3">
         <v-col cols="12" class="form-container">
-          <v-form>
+          <v-form
+        
+          >
             <v-row>
               <v-col
                   cols="12"
@@ -105,6 +130,7 @@
                 <v-select
                   :items="types"
                   label="Type"
+                  v-model="AddItemData.type"
                 ></v-select>
                 </v-col>
             </v-row>
@@ -115,23 +141,40 @@
                 >
                 <p> Package</p>
                 <v-radio-group
-                    v-model="photoshootpackage"
+                    v-model="AddItemData.package"
                     mandatory
                     row
                   >
                     <v-radio
                       label="Budget"
-                      value="budget"
+                      value="Budget"
                     ></v-radio>
                     <v-radio
                       label="Standard"
-                      value="standard"
+                      value="Standard"
                     ></v-radio>
                     <v-radio
                       label="Premium"
-                      value="premium"
+                      value="Premium"
                     ></v-radio>
                   </v-radio-group>
+                </v-col>
+            </v-row>
+
+            <v-row class="mt-3 ">
+              <v-col
+                  cols="12"
+                  md="6"
+                >
+                <v-text-field
+                label="Photoshoot Location"
+                placeholder="Photoshoot Location"
+                outlined
+                dense
+                required
+                class="inputfield"
+                v-model= "AddItemData.location"
+              ></v-text-field>
                 </v-col>
             </v-row>
             
@@ -145,11 +188,13 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <Datepicker v-model="date" label="Photoshoot Date" />
+                    <Datepicker v-model="AddItemData.datetime" label="Photoshoot Date" />
                   </v-col>
                 </v-row>
               </v-col>
             </v-row>
+
+          
             <v-row class=" mt-9">
               <v-col>
                 <h6 class="h6-bold">
@@ -164,8 +209,11 @@
                   cols="12"
                   md="6"
                 >
-                  <textarea name="notes" >
-                    This is an example note
+                  <textarea 
+                  name="notes" 
+                  v-model="AddItemData.notes"
+                  >
+                   
                   </textarea>
                 </v-col>
             </v-row>
@@ -188,6 +236,25 @@
                 ></v-file-input>
                 </v-col>
             </v-row>
+            <v-row class="mt-9">
+              <v-col>
+                <h6 class="h6-bold">
+               Status
+                </h6>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                  cols="12"
+                  md="6"
+                >
+                <v-select
+                  :items="statuses"
+                  label="Status"
+                  v-model="AddItemData.status"
+                ></v-select>
+                </v-col>
+            </v-row>
           </v-form>
         </v-col>
         
@@ -199,7 +266,7 @@
           md="6"
           class="ps-0"
           >
-              <v-btn class="btn primary-btn mr-5">
+              <v-btn @click="firebaseAddSingleItem()" class="btn primary-btn mr-5" >
                 Save
                 </v-btn>
                 <v-btn class="btn secondary-btn">
@@ -217,20 +284,37 @@
 import { ref } from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 
+import useBookings from '@/modules/useBookings';
+
+const {
+  firebaseAddSingleItem,
+  AddItemData,
+  snackbar
+} = useBookings()
+
+const multiLine = ref(true)
+
 const types = ref([
-  'Wedding',
-  'Family',
-  'Maternity',
-  'Baby',
-  'Child',
-  'Pet',
-  'Other'
+  'Event',
+  'Outdoor Portrait',
+  'Holiday'
 ]);
 
-const photoshootpackage = ref('budget');
-const date = ref(new Date());
+const statuses = ref([
+  'Pending',
+  'Confirmed',
+  'Cancelled'
+]);
+
+// const photoshootpackage = ref('budget');
+// const date = ref(new Date());
+
 
 document.getElementsByClassName("dp__action dp__select").innerHTML = "Save";
+
+// onMounted(() => {
+//   getLastItem()
+// })
 
 </script>
 

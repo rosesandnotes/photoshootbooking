@@ -9,26 +9,28 @@
             <v-col cols="12" md="6">
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
-                  <p class="p1 p1-black item-label">Type</p>
-                  <p class="p-black">Event</p>
+                  <p class="p1 p1-black item-label">Fullname</p>
+                  <p class="p-black"> {{props.clientdetails}} </p>
+
+                  <p class="p-black"> {{props.clientdetails.firstname +  " " + props.clientdetails.lastname}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
-                  <p class="p1 p1-black item-label">Package</p>
-                  <p class="p-black">Budget</p>
+                  <p class="p1 p1-black item-label">Address</p>
+                  <p class="p-black"> {{props.clientdetails}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
-                  <p class="p1 p1-black item-label">Photoshoot Location</p>
-                  <p class="p-black">Ølgod, Denmark</p>
+                  <p class="p1 p1-black item-label">contact number</p>
+                  <p class="p-black">{{props.clientdetails}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
-                  <p class="p1 p1-black item-label">Photoshoot Date and Time</p>
-                  <p class="p-black">October 2, 2022, 7:00 AM</p>
+                  <p class="p1 p1-black item-label">email</p>
+                  <p class="p-black">{{props.clientdetails}} </p>
                 </v-col>
               </v-row>
             </v-col>  
@@ -37,6 +39,12 @@
 </template>
 
 <script setup>
+
+import defineProps from 'vue'
+
+const props = defineProps({
+  clientdetails: Object
+});
 
 </script>
 
