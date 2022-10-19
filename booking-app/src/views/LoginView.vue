@@ -7,20 +7,19 @@
      <form >
           <v-text-field
             v-model="email"
-            :error-messages="emailErrors"
+            
             label="E-mail"
             required
-            @input="$v.email.$touch()"
-            @blur="$v.email.$touch()"
+           
           ></v-text-field>
           <v-text-field
             v-model="password"
-            :error-messages="passwordErrors"
+            
             label="Password"
             required
-            @input="$v.password.$touch()"
-            @blur="$v.password.$touch()"  
+           
           ></v-text-field>
+          <p v-if="errMsg" class="errorMessage mb-4"> {{errMsg}} </p>
           <v-btn
             class="mr-4 btn primary-btn"
             @click.prevent="login()"
@@ -35,9 +34,36 @@
 </template>
 
 <script setup>
-// import useUsers from '@/modules/useUsers';
 
-// const { login, email, password } = useUsers();
+import { ref,onMounted} from 'vue';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import useUsers from '@/modules/useUsers';
+
+// const {logout} = useUsers();
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  console.log("inside login view")
+  isLoggedinTest()
+  const auth = getAuth();
+  console.log("auth: ",auth)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+    console.log("isLoggedIn: ",isLoggedIn.value)
+  });
+  
+}); 
+
+const { login, 
+        email, 
+        password,
+        errMsg,
+        isLoggedinTest
+      } = useUsers()
 
 </script>
 
@@ -59,5 +85,9 @@ h4{
   text-align: center;
 }
 
+.errorMessage{
+  color: red;
+  font-size: 12px;
+}
 
 </style>

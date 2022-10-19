@@ -1,5 +1,23 @@
 <template>
   <div >
+    <v-snackbar
+        v-model="snackbar"
+        :multi-line="multiLine"
+      
+      >
+      Booking item deleted successfully.
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
       <v-row v-for="(booking, index) in bookings" :key="booking" class="d-flex justify-center align-center row-underline">
           <v-col cols="2" >
             <p class="p-black" > {{index+1}} </p>
@@ -19,7 +37,7 @@
           <v-col cols="2">
             <router-link :to="'/view/' + booking.id" class="me-3"> View </router-link>
             <router-link :to="'/edit/' + booking.id" class="me-3"> Edit </router-link>
-            <router-link to="/delete/1"> Delete </router-link>
+            <a class="delete-button" @click="firebaseDeleteSingleItem(booking.id)"> Delete </a>
 
           </v-col>
       </v-row>
@@ -29,11 +47,15 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted,ref } from 'vue'
 import useBookings from '../modules/useBookings'
 
+const multiLine = ref(true)
+
 const { bookings, 
-        getBookingsData
+        getBookingsData,
+    firebaseDeleteSingleItem,
+    snackbar
       } = useBookings()
 
 
@@ -51,6 +73,11 @@ a{
   color: $primary-color;
   text-decoration: none;
 }
+
+.delete-button:hover{
+    cursor: pointer;
+  }
+
 
 
 </style>

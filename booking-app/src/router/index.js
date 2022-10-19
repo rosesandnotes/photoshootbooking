@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-//import {getAuth, onAuthStateChanged} from 'firebase/auth'
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
 const routes = [
   {
@@ -44,7 +44,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-/* 
+
 const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const removeEventListener = onAuthStateChanged(
@@ -65,6 +65,9 @@ router.beforeEach(async(to, from, next) => {
       next();
     }
   }
+  else{
+    next();
+  }
 })
- */
+ 
 export default router

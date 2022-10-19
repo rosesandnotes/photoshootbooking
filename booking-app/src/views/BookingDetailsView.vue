@@ -2,17 +2,18 @@
   <div class="bookingdetailsview-container my-16 ">
     <v-container>
       <v-row class="btn-container d-flex align-center mb-16">
+        
           <a href="/bookings" class="me-9">
               <v-icon class="left-arrow"> mdi-arrow-left</v-icon> 
             </a>
             <h5 class="me-9">
               Booking ID: {{ $route.params.id }}
+              <!-- Booking #: {{ bookingNumber }} -->
             </h5>
             <div class="booking-status btn-rounded btn-rounded-black ">
             <p class="p-black-boldld "> {{bookingItem.status}} </p>
           </div>
       </v-row>
-      
 
       <ClientDetailsComponent :clientdetails="bookingItem.clientdetails" class="mb-9"/>
      <PhotoshootDetailsComponent :bookingdetails="bookingItem.bookingdetails" class="mb-9"/>
@@ -31,7 +32,8 @@
             id=""
             cols="30"
             rows="10"
-            v-model="bookingItem.bookingdetails"
+            v-if="bookingItem.bookingdetails"
+            :value="bookingItem.bookingdetails.notes"
             disabled
 
           ></textarea>
@@ -78,7 +80,10 @@ const {
   bookingItem,
 } = useBookings()
 
+// const bookingNumber = useRoute().params.id.split("/")[1];
+
 const route = useRoute();
+
 
 onMounted(() => {
   console.log("route params id: ",route.params.id);
@@ -110,6 +115,7 @@ textarea{
   resize: none;
   min-height: 200px;
   min-width: 100%;
+  padding: 20px;
 }
 
 .v-icon, .v-btn{

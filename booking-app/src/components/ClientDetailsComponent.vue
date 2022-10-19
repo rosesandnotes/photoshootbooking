@@ -10,27 +10,26 @@
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
                   <p class="p1 p1-black item-label">Fullname</p>
-                  <p class="p-black"> {{props.clientdetails}} </p>
+                  <p class="p-black" v-if="props.clientdetails"> {{ props.clientdetails.firstname + " " +  props.clientdetails.lastname}} </p>
 
-                  <p class="p-black"> {{props.clientdetails.firstname +  " " + props.clientdetails.lastname}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
                   <p class="p1 p1-black item-label">Address</p>
-                  <p class="p-black"> {{props.clientdetails}} </p>
+                  <p class="p-black" v-if="props.clientdetails"> {{props.clientdetails.address}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
                   <p class="p1 p1-black item-label">contact number</p>
-                  <p class="p-black">{{props.clientdetails}} </p>
+                  <p class="p-black"  v-if="props.clientdetails">{{props.clientdetails.contactnumber}} </p>
                 </v-col>
               </v-row>
               <v-row class="mb-3">
                 <v-col cols="12" md="6">
                   <p class="p1 p1-black item-label">email</p>
-                  <p class="p-black">{{props.clientdetails}} </p>
+                  <p class="p-black" v-if="props.clientdetails">{{props.clientdetails.email}} </p>
                 </v-col>
               </v-row>
             </v-col>  
@@ -40,10 +39,12 @@
 
 <script setup>
 
-import defineProps from 'vue'
 
 const props = defineProps({
-  clientdetails: Object
+  clientdetails: {
+    type: Object,
+    required: true,
+  }
 });
 
 </script>

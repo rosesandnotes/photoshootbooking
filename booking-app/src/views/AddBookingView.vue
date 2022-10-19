@@ -2,24 +2,28 @@
   <div>
     <v-container class="mt-16 mb-9">
       <v-snackbar
-                  v-model="snackbar"
-                  :multi-line="multiLine"
-                
-                >
-                You have added a new post.
+        v-model="snackbar"
+        :multi-line="multiLine"
+      
+      >
+      Booking added successfully.
 
-                  <template v-slot:action="{ attrs }">
-                    <v-btn
-                      color="red"
-                      text
-                      v-bind="attrs"
-                      @click="snackbar = false"
-                    >
-                      Close
-                    </v-btn>
-                  </template>
-                </v-snackbar>
-      <v-row class="page-title-container mb-16">
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      
+      <v-row class="page-title-container mb-16 d-flex align-center">
+        <a href="/bookings" class="me-9">
+              <v-icon class="left-arrow"> mdi-arrow-left</v-icon> 
+            </a>
         <v-col
         cols="12"
         md="6"
@@ -269,9 +273,11 @@
               <v-btn @click="firebaseAddSingleItem()" class="btn primary-btn mr-5" >
                 Save
                 </v-btn>
-                <v-btn class="btn secondary-btn">
+              
+                <v-btn @click="$router.go(-1)" class="btn secondary-btn">
                 Cancel
                 </v-btn>
+
           </v-col>
       </v-row>
     </v-container>
@@ -305,6 +311,7 @@ const statuses = ref([
   'Confirmed',
   'Cancelled'
 ]);
+
 
 // const photoshootpackage = ref('budget');
 // const date = ref(new Date());
@@ -344,6 +351,10 @@ textarea{
   border: 1px solid $greyish-color;
   min-height: 200px;
   min-width: 100%;
+}
+
+.v-icon {
+  color: $primary-color;
 }
 
 </style>

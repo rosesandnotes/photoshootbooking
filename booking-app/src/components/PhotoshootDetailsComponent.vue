@@ -10,25 +10,25 @@
         <v-row class="mb-3">
           <v-col cols="12" md="6">
             <p class="p1 p1-black item-label">Type</p>
-            <p class="p-black">{{props.bookingdetails}} </p>
+            <p class="p-black" v-if="props.bookingdetails">{{props.bookingdetails.type}} </p>
           </v-col>
         </v-row>
         <v-row class="mb-3">
           <v-col cols="12" md="6">
             <p class="p1 p1-black item-label">Package</p>
-            <p class="p-black">{{props.bookingdetails}} </p>
+            <p class="p-black" v-if="props.bookingdetails">{{props.bookingdetails.package}} </p>
           </v-col>
         </v-row>
         <v-row class="mb-3">
           <v-col cols="12" md="6">
-            <p class="p1 p1-black item-label">Date & Time</p>
-            <!-- <p class="p-black">{{props.bookingdetails.datetime.toDate()}} </p> -->
+            <p class="p1 p1-black item-label" >Date & Time</p>
+            <p class="p-black" v-if="props.bookingdetails">{{props.bookingdetails.datetime.toDate()}} </p>
           </v-col>
         </v-row>
         <v-row class="mb-3">
           <v-col cols="12" md="6">
             <p class="p1 p1-black item-label">Location</p>
-            <p class="p-black">{{props.bookingdetails}}</p>
+            <p class="p-black" v-if="props.bookingdetails">{{props.bookingdetails.location}}</p>
           </v-col>
         </v-row>
       </v-col>  
@@ -37,11 +37,11 @@
 </template>
 
 <script setup>
-import defineProps from 'vue'
 
 const props = defineProps({
   bookingdetails: Object
 });
+
 </script>
 
 <style lang="scss" scoped>
