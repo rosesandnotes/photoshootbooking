@@ -14,10 +14,9 @@
           ></v-text-field>
           <v-text-field
             v-model="password"
-            
             label="Password"
+            type="password"
             required
-           
           ></v-text-field>
           <p v-if="errMsg" class="errorMessage mb-4"> {{errMsg}} </p>
           <v-btn
@@ -35,36 +34,17 @@
 
 <script setup>
 
-import { ref,onMounted} from 'vue';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
-import useUsers from '@/modules/useUsers';
+import useUsers from '../modules/useUsers';
 
-// const {logout} = useUsers();
-const isLoggedIn = ref(false);
+const {login, email, password, errMsg } = useUsers();
 
-onMounted(() => {
-  console.log("inside login view")
-  isLoggedinTest()
-  const auth = getAuth();
-  console.log("auth: ",auth)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      isLoggedIn.value = true;
-    } else {
-      isLoggedIn.value = false;
-    }
-    console.log("isLoggedIn: ",isLoggedIn.value)
-  });
-  
-}); 
+// const show1 = false;
 
-const { login, 
-        email, 
-        password,
-        errMsg,
-        isLoggedinTest
-      } = useUsers()
 
+// const rules = {
+//   required: (value) => !!value || 'Required.',
+//   min: (v) => v.length >= 8 || 'Min 8 characters',
+// };
 </script>
 
 <style lang="scss" scoped>

@@ -24,19 +24,18 @@
 
 <script setup>
 
-// import {onMounted} from 'vue'
-// import useUsers from '@/modules/useUsers'
+import { onMounted} from 'vue';
+import useUsers from '../modules/useUsers';
 
+const { 
+    isLoggedin,
+    logout,
+    isLoggedinTest
+      } = useUsers()
 
-// const { 
-//     isLoggedin,
-//     isLoggedinTest,
-//     logout
-//       } = useUsers()
-
-// onMounted(() => {
-//   isLoggedinTest()
-// })
+onMounted(() => {
+  isLoggedinTest();
+})
 
 </script>
 

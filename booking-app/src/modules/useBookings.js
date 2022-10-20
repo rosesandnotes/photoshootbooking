@@ -18,10 +18,10 @@ const useBookings = () => {
 
   // Retrieve data from firebase
   const getBookingsData = () => {
-    console.log("getBookingsData")
+    // console.log("getBookingsData")
     onSnapshot(bookingDataRef, (snapshot) => {
       bookings.value = snapshot.docs.map(doc => {
-        console.log("Doc Data",doc.data())
+        // console.log("Doc Data",doc.data())
         if(doc.data().bookingdetails.type == "Event"){
           eventCtr.value++
         }else if(doc.data().bookingdetails.type == "Outdoor Portrait"){
@@ -42,12 +42,12 @@ const useBookings = () => {
   }
 
   const getBookingItem = (id) => {
-    console.log("getBookingItem")
+    // console.log("getBookingItem")
     const bookingItemRef = doc(db, "Bookings", id);
     getDoc(bookingItemRef).then((doc) => {
       if (doc.exists()) {
         bookingItem.value = doc.data()
-        console.log("Document data:", bookingItem.value);
+        // console.log("Document data:", bookingItem.value);
       } else {
         console.log("No such document!");
       }
@@ -92,9 +92,9 @@ const useBookings = () => {
   }
 
   const firebaseUpdateSingleItem = async(id) => {
-    console.log("firebaseUpdateSingleItem ID:", id)
-    console.log("Booking Item Date: ", bookingItem.value)
-    console.log("firebaseUpdateSingleItem Data:", bookings.value.find(item => item.id === id))
+    // console.log("firebaseUpdateSingleItem ID:", id)
+    // console.log("Booking Item Date: ", bookingItem.value)
+    // console.log("firebaseUpdateSingleItem Data:", bookings.value.find(item => item.id === id))
     await updateDoc(doc(bookingDataRef, id),{
       
       clientdetails: {

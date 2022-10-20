@@ -60,8 +60,11 @@ const { bookings,
 
 
 onMounted(() => {
-  getBookingsData()
+  getBookingsData();
 })
+
+
+
 </script>
 
 <style lang="scss" scoped>

@@ -3,12 +3,13 @@
     <h1 class="h1-primary"> Welcome </h1>
     <h5 class="h5-secondary mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
     <div class="button-container">
-      <router-link to="/login">
+      <router-link  v-if="!isLoggedin" to="/login">
         <v-btn
           elevation="1"
           large
           tile
-        class="primary-btn btn mr-5"> 
+        class="primary-btn btn mr-5"
+        > 
         Login
       </v-btn>
       </router-link>
@@ -26,6 +27,19 @@
 </template>
 
 <script setup>
+import {onMounted} from 'vue'
+import useUsers from '@/modules/useUsers'
+
+const { 
+  isLoggedinTest,
+  isLoggedin
+      } = useUsers()
+
+console.log("isLoggedin: ",isLoggedin)
+
+onMounted(() => {
+  isLoggedinTest()
+})
 
 </script>
 

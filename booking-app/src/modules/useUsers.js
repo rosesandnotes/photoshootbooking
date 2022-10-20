@@ -1,26 +1,31 @@
-import {ref} from 'vue'
-import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'firebase/auth'
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import {auth} from '../firebase'
 
-const useUsers = () =>{
-  const auth = getAuth()
+import { useRouter } from 'vue-router'
+
+const useUsers = () => {
+  // const auth = getAuth()
   const email = ref('')
   const password = ref('')
   const user = ref(null)
   const router = useRouter()
   const errMsg = ref('')
+  const isLoggedin = ref(false)
+
+  console.log("Auth Initial: ", auth)
 
   const login = async () => {
-    
+    console.log("Inside Login")
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       user.value = userCredential.user;
-      console.log("user: ", user.value)
+      // console.log("user: ", user.value)
       localStorage.setItem("userLoginInfoFireBase", user.value.email);
-      console.log(localStorage.getItem("userLoginInfoFireBase"))
-      router.push("/bookings")
+      // console.log(localStorage.getItem("userLoginInfoFireBase"))
+      router.push("/bookings");
     }).catch((error) => {
-      console.log("Error Code: ", error.code)
+      // console.log("Error Code: ", error.code)
       switch (error.code) {
         case "auth/invalid-email":
           errMsg.value = "Invalid email address"
@@ -37,26 +42,24 @@ const useUsers = () =>{
     })
   }
 
-  const logout = async () => {
+  const logout = () => {
     signOut(auth).then(() => {
-      console.log("logged out". user.value)
-      localStorage.removeItem("userLoginInfoFireBase");
+      console.log("logged out", user.value)
+      // localStorage.removeItem("userLoginInfoFireBase");
       // user.value = null
-      router.push("/login")
+      router.push("/login");
     }).catch((error) => {
       console.log(error)
     })
   }
 
-  const isLoggedin = ref(false)
 
-  const isLoggedinTest = async () => {
-    // const auth = getAuth();
-    console.log("isLoggedinTest auth", auth)
-    user.value = auth.currentUser;
-     await onAuthStateChanged(auth, (user) => {
+
+  const isLoggedinTest = () => {
+      user.value = auth.currentUser;
+      onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("user: ", user)
+        // console.log("user: ", user)
         isLoggedin.value = true
       } else {
         console.log("no user")

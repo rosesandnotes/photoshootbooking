@@ -14,14 +14,6 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
-    path: '/bookings',
-    name: 'bookings',
-    component: () => import('../views/BookingsView.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/view/:id',
     name: 'view ',
     component: () => import('../views/BookingDetailsView.vue'),
@@ -37,6 +29,14 @@ const routes = [
     path: '/add',
     name: 'add ',
     component: () => import('../views/AddBookingView.vue')
+  },
+  {
+    path: '/bookings',
+    name: 'bookings',
+    component: () => import('../views/BookingsView.vue'),
+    meta: {
+      requiresAuth: true 
+    }
   }
 ]
 
@@ -50,8 +50,8 @@ const getCurrentUser = () => {
     const removeEventListener = onAuthStateChanged(
       getAuth(),
       (user) => {
-        removeEventListener()
-        resolve(user)
+        removeEventListener();
+        resolve(user);
       },
       reject
     )
@@ -59,13 +59,20 @@ const getCurrentUser = () => {
 }
 
 router.beforeEach(async(to, from, next) => {
-  const requiresAUth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAUth = to.matched.some((record) => record.meta.requiresAuth);
+
+  console.log("requiresAUth: ", requiresAUth);
+
   if(requiresAUth){
-    if(await getCurrentUser){
+    const user = await getCurrentUser();
+    if(!user){
+      next({
+        name: 'login'
+      })
+    } else {
       next();
     }
-  }
-  else{
+  } else {
     next();
   }
 })
