@@ -42,7 +42,7 @@
         </v-col>
      </v-row>
 
-     <v-row>
+     <!-- <v-row>
         <v-col
           cols="12"
           md="6"
@@ -61,7 +61,7 @@
                 Download Invoice
           </v-btn>
         </v-col>
-     </v-row>
+     </v-row> -->
 
     </v-container>
   </div>

@@ -228,7 +228,7 @@
             </v-row>
           
           
-            <v-row class="mt-9">
+            <!-- <v-row class="mt-9">
               <v-col>
                 <h6 class="h6-bold">
                Attachment
@@ -246,7 +246,7 @@
                   label="Upload File"
                 ></v-file-input>
                 </v-col>
-            </v-row>
+            </v-row> -->
             <v-row class="mt-9">
               <v-col>
                 <h6 class="h6-bold">

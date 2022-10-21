@@ -13,9 +13,9 @@
         Login
       </v-btn>
       </router-link>
-      <router-link to="/bookings">
+      <router-link v-if="isLoggedin" to="/bookings">
         <v-btn
-          class="secondary-btn btn"
+          class="primary-btn btn"
           elevation="1"
           large
           outlined

@@ -52,6 +52,8 @@
                 <v-text-field
                 label="First Name"
                 placeholder="First Name"
+                :rules="rules"
+                hide-details="auto"
                 outlined
                 dense
                 required
@@ -69,6 +71,8 @@
                 label="Last Name"
                 placeholder="Last Name"
                 v-model="AddItemData.lastname"
+                :rules="rules"
+                hide-details="auto"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -81,6 +85,8 @@
                 label="Address"
                 placeholder="Address"
                 v-model="AddItemData.address"
+                :rules="rules"
+                hide-details="auto"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -93,6 +99,11 @@
                 label="Phone Number"
                 placeholder="Phone Number"
                 v-model="AddItemData.contactnumber"
+                :rules="phoneRules"
+                hide-details="auto"
+                type="tel"
+                pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"
+                hint="Format: 12-34-5678"
               ></v-text-field>
 
                 </v-col>
@@ -107,6 +118,8 @@
                 type="email"
                 placeholder="Email"
                 v-model="AddItemData.email"
+                hide-details="auto"
+                :rules="emailRules"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -221,14 +234,14 @@
                   </textarea>
                 </v-col>
             </v-row>
-            <v-row class="mt-9">
+            <!-- <v-row class="mt-9">
               <v-col>
                 <h6 class="h6-bold">
                Attachment
                 </h6>
               </v-col>
-            </v-row>
-            <v-row>
+            </v-row> -->
+            <!-- <v-row>
                 <v-col
                   cols="12"
                   md="6"
@@ -239,7 +252,7 @@
                   label="Upload File"
                 ></v-file-input>
                 </v-col>
-            </v-row>
+            </v-row> -->
             <v-row class="mt-9">
               <v-col>
                 <h6 class="h6-bold">
@@ -312,6 +325,21 @@ const statuses = ref([
   'Cancelled'
 ]);
 
+const rules = ref([
+        value => !!value || 'Required.',
+        value => (value && value.length >= 3) || 'Min 3 characters',
+]);
+
+
+const phoneRules = ref([
+  value => !!value || 'Required.',
+  value => (value && value.length >= 8) || 'Min 8 characters',
+]);
+
+const emailRules = ref([
+  value => !!value || 'Required.',
+  value => /.+@.+\..+/.test(value) || 'E-mail must be valid',
+]);
 
 // const photoshootpackage = ref('budget');
 // const date = ref(new Date());
