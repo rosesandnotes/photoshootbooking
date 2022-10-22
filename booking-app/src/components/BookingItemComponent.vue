@@ -108,6 +108,16 @@ a{
     cursor: pointer;
   }
 
+  .booking-enter-from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .booking-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all 0.5s ease;
+  }
 
 
 </style>

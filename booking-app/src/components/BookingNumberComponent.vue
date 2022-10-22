@@ -1,6 +1,7 @@
 <template>
    <div class="booking-count-container d-flex">
-        <div class="total-bookings-container me-9 d-flex flex-column justify-center align-center">
+   
+      <div class="total-bookings-container me-9 d-flex flex-column justify-center align-center">
           <p class="p-black">Total Bookings</p>
           <h4 class="h4-black">{{counter}} </h4>
         </div>
@@ -16,6 +17,7 @@
           <p class="p-black">Holiday</p>
           <h4 class="h4-black">{{holidayCtr}}</h4>
         </div>
+        
       </div>
 </template>
 
@@ -44,4 +46,6 @@ onMounted(() => {
 @import "../assets/shared";
 @include p;
 @include h4;
+
+
 </style>
