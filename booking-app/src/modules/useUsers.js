@@ -20,7 +20,7 @@ const useUsers = () => {
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       user.value = userCredential.user;
-      // console.log("user: ", user.value)
+      console.log("user: ", user.value)
       localStorage.setItem("userLoginInfoFireBase", user.value.email);
       // console.log(localStorage.getItem("userLoginInfoFireBase"))
       router.push("/bookings");

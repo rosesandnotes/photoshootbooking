@@ -1,7 +1,10 @@
 <template>
   <div class="hero-container d-flex justify-center align-center flex-column flex-wrap">
-    <h1 class="h1-primary"> Welcome </h1>
-    <h5 class="h5-secondary mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
+
+      <h1 class="h1-primary"> Welcome 
+    </h1>
+      <h5 class="h5-secondary mt-5 mb-8"> Roses and Notes Photography <br> Booking System </h5>
+
     <div class="button-container">
       <router-link  v-if="!isLoggedin" to="/login">
         <v-btn
