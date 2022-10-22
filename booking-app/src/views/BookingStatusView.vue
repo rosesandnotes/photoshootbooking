@@ -61,8 +61,8 @@
 import BookingNumberComponent from '../components/BookingNumberComponent.vue';
 import BookingStatusComponent from '../components/BookingStatusComponent.vue';
 import BookingItemTitleComponent from '../components/BookingItemTitleComponent.vue';
+import { watch } from 'vue'
 
-import {onMounted} from 'vue'
 import {useRoute} from 'vue-router'
 import useBookings from '../modules/useBookings'
 
@@ -71,17 +71,17 @@ const {
   snackbarText,
   multiLine,
   filteredBookings,
-  getFilteredBookings,
-  firebaseDeleteSingleItem
+  firebaseDeleteSingleItem,
+  getFilteredBookings
 } = useBookings()
 
 const route = useRoute();
 
 
-
-onMounted(() => {
+watch (route, () => {
   getFilteredBookings(route.params.status)
-})
+}, {immediate: true})
+
 
 
 </script>

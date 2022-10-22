@@ -1,4 +1,4 @@
-import {ref } from 'vue'
+import {ref} from 'vue'
 import {collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, query, where, getDocs} from 'firebase/firestore';
 import {db} from '../firebase.js'
 import { useRouter } from 'vue-router';
@@ -16,7 +16,7 @@ const useBookings = () => {
   let bookingConfirmed = ref([])
   let bookingCancelled = ref([])
   const filterStatus = ref("All")
-  const filteredBookings = ref([])
+  let filteredBookings = ref([])
 
   const AddItemData = ref({})
   let snackbar = ref(false)
@@ -140,6 +140,9 @@ const useBookings = () => {
 
   const getBookingsStatus = async (status) => {
     filterStatus.value = status
+    bookingPending.value = []
+    bookingConfirmed.value = []
+    bookingCancelled.value = []
     console.log("getBookingItem")
     const bookingStatusRef = query(bookingDataRef, where("status", "==", status));
     const querySnapshot = await getDocs(bookingStatusRef);
@@ -178,11 +181,9 @@ const useBookings = () => {
       default:
         console.log("All")
         getBookingsData();
-        console.log("...Bookings: ", bookings.value)
         break;
     }
   }
-
 
   return {
     bookings,
