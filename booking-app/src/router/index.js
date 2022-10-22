@@ -37,6 +37,14 @@ const routes = [
     meta: {
       requiresAuth: true 
     }
+  },
+  {
+    path: '/bookings/:status',
+    name: 'status',
+    component: () => import('../views/BookingStatusView.vue'),
+    meta: {
+      requiresAuth: true 
+    }
   }
 ]
 

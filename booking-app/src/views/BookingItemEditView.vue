@@ -20,7 +20,7 @@
         </template>
       </v-snackbar>
       <v-row class="btn-container d-flex align-center mb-16">
-          <a href="/bookings" class="me-9">
+          <a @click="$router.go(-1)" class="me-9">
               <v-icon class="left-arrow"> mdi-arrow-left</v-icon> 
             </a>
             <h5 class="me-9">

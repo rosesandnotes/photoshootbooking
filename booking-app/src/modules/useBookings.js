@@ -1,5 +1,5 @@
 import {ref } from 'vue'
-import {collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc} from 'firebase/firestore';
+import {collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, query, where, getDocs} from 'firebase/firestore';
 import {db} from '../firebase.js'
 import { useRouter } from 'vue-router';
 
@@ -12,9 +12,15 @@ const useBookings = () => {
   let outdoorCtr = ref(0)
   let holidayCtr = ref(0)
   const bookingDataRef = collection (db, "Bookings");
+  let bookingPending = ref([])
+  let bookingConfirmed = ref([])
+  let bookingCancelled = ref([])
+  const filterStatus = ref("All")
+  const filteredBookings = ref([])
 
   const AddItemData = ref({})
   let snackbar = ref(false)
+  let snackbarText = ref('')
 
   // Retrieve data from firebase
   const getBookingsData = () => {
@@ -37,7 +43,10 @@ const useBookings = () => {
         }
         
       })
-      console.log("inside getBookingsData")
+      filteredBookings.value = {
+        ...bookings.value,
+        id: bookings.value.id
+      };
     })
   }
 
@@ -87,6 +96,7 @@ const useBookings = () => {
        status: AddItemData.value.status,
     }).then(() => {
       snackbar.value = true
+      snackbarText.value = "Booking Added Successfully"
       router.push("/bookings")
     })
   }
@@ -115,6 +125,7 @@ const useBookings = () => {
 
     }).then(() => { 
       snackbar.value = true
+      snackbarText.value = "Booking Updated Successfully"
       router.push("/bookings")
     })
   }
@@ -122,7 +133,54 @@ const useBookings = () => {
   const firebaseDeleteSingleItem = async(id) => {
     await deleteDoc(doc(bookingDataRef, id)).then(() => {
       snackbar.value = true
+      snackbarText.value = "Booking Deleted Successfully"
+      location.reload()
     })
+  }
+
+  const getBookingsStatus = async (status) => {
+    filterStatus.value = status
+    console.log("getBookingItem")
+    const bookingStatusRef = query(bookingDataRef, where("status", "==", status));
+    const querySnapshot = await getDocs(bookingStatusRef);
+    querySnapshot.forEach((doc) => {
+      switch(doc.data().status){
+        case 'Pending':
+          bookingPending.value.push({...doc.data(), id: doc.id})
+          break;
+        case 'Confirmed':
+          bookingConfirmed.value.push({...doc.data(), id: doc.id})
+          break;
+        case 'Cancelled':
+          bookingCancelled.value.push({...doc.data(), id: doc.id})
+          break;
+      }
+    });
+  }
+
+  const getFilteredBookings = (status) => {
+    if(status != "All"){
+      getBookingsStatus(status)
+    }
+    switch(status){
+      case 'Pending':
+        console.log("Pending")
+        filteredBookings.value = bookingPending.value
+        break;
+      case 'Confirmed':
+        console.log("Confirmed")
+        filteredBookings.value = bookingConfirmed.value
+        break;
+      case 'Cancelled':
+        console.log("Cancelled")
+        filteredBookings.value = bookingCancelled.value
+        break;
+      default:
+        console.log("All")
+        getBookingsData();
+        console.log("...Bookings: ", bookings.value)
+        break;
+    }
   }
 
 
@@ -132,6 +190,7 @@ const useBookings = () => {
     getBookingsData,
     AddItemData,
     snackbar,
+    snackbarText,
     firebaseAddSingleItem,
     countBookingsData,
     bookingItem,
@@ -140,7 +199,14 @@ const useBookings = () => {
     firebaseDeleteSingleItem,
     eventCtr,
     outdoorCtr,
-    holidayCtr
+    holidayCtr,
+    getBookingsStatus,
+    bookingPending,
+    bookingConfirmed,
+    bookingCancelled,
+    filterStatus,
+    getFilteredBookings,
+    filteredBookings
   }
 }
 

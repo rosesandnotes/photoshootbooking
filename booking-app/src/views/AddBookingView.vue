@@ -4,10 +4,9 @@
       <v-snackbar
         v-model="snackbar"
         :multi-line="multiLine"
-      
+        :timeout="timeout"
       >
-      Booking added successfully.
-
+        {{ snackbarText }}
         <template v-slot:action="{ attrs }">
           <v-btn
             color="red"
@@ -19,7 +18,12 @@
           </v-btn>
         </template>
       </v-snackbar>
-      
+      <v-form
+      ref="form"
+       v-model="valid"
+        lazy-validation
+          >
+
       <v-row class="page-title-container mb-16 d-flex align-center">
         <a href="/bookings" class="me-9">
               <v-icon class="left-arrow"> mdi-arrow-left</v-icon> 
@@ -41,9 +45,7 @@
       </v-row>
       <v-row class="mt-3">
         <v-col cols="12" class="form-container">
-          <v-form
-         
-          >
+          
             <v-row>
               <v-col
                   cols="12"
@@ -124,7 +126,7 @@
                 </v-col>
             </v-row>
           
-        </v-form>
+        <!-- </v-form> -->
         </v-col>
         
       </v-row>
@@ -136,9 +138,9 @@
       </v-row>
       <v-row class="mt-3">
         <v-col cols="12" class="form-container">
-          <v-form
+          <!-- <v-form
         
-          >
+          > -->
             <v-row>
               <v-col
                   cols="12"
@@ -148,6 +150,8 @@
                   :items="types"
                   label="Type"
                   v-model="AddItemData.type"
+                  :rules="selectRules"
+                  hide-details="auto"
                 ></v-select>
                 </v-col>
             </v-row>
@@ -161,6 +165,8 @@
                     v-model="AddItemData.package"
                     mandatory
                     row
+                    :rules="selectRules"
+                    hide-details="auto"
                   >
                     <v-radio
                       label="Budget"
@@ -191,6 +197,8 @@
                 required
                 class="inputfield"
                 v-model= "AddItemData.location"
+                :rules="rules"
+                hide-details="auto"
               ></v-text-field>
                 </v-col>
             </v-row>
@@ -205,7 +213,10 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <Datepicker v-model="AddItemData.datetime" label="Photoshoot Date" />
+                    <Datepicker 
+                    hide-details="auto"
+                    required=""
+                    v-model="AddItemData.datetime" label="Photoshoot Date" />
                   </v-col>
                 </v-row>
               </v-col>
@@ -229,6 +240,8 @@
                   <textarea 
                   name="notes" 
                   v-model="AddItemData.notes"
+                  :rules="rules"
+                hide-details="auto"
                   >
                    
                   </textarea>
@@ -269,23 +282,34 @@
                   :items="statuses"
                   label="Status"
                   v-model="AddItemData.status"
+                  :rules = "selectRules"
+                    hide-details="auto"
                 ></v-select>
                 </v-col>
             </v-row>
-          </v-form>
+         
         </v-col>
         
       </v-row>
-      
+    </v-form>
       <v-row class="btn-container d-flex justify-start mt-9 mb-16">
           <v-col
           cols="12"
           md="6"
           class="ps-0"
           >
-              <v-btn @click="firebaseAddSingleItem()" class="btn primary-btn mr-5" >
+              <v-btn
+              :disabled="!valid"
+              @click="firebaseAddSingleItem()" 
+              class="btn primary-btn mr-5" >
                 Save
                 </v-btn>
+                <!-- <v-btn
+              :disabled="!valid"
+              @click="validate()" 
+              class="btn primary-btn mr-5" >
+                Save
+                </v-btn> -->
               
                 <v-btn @click="$router.go(-1)" class="btn secondary-btn">
                 Cancel
@@ -312,6 +336,9 @@ const {
 } = useBookings()
 
 const multiLine = ref(true)
+const valid = ref(true)
+
+const snackbarText = ref('Booking saved successfully.')
 
 const types = ref([
   'Event',
@@ -324,6 +351,8 @@ const statuses = ref([
   'Confirmed',
   'Cancelled'
 ]);
+
+const timeout = ref(3000)
 
 const rules = ref([
         value => !!value || 'Required.',
@@ -341,8 +370,9 @@ const emailRules = ref([
   value => /.+@.+\..+/.test(value) || 'E-mail must be valid',
 ]);
 
-// const photoshootpackage = ref('budget');
-// const date = ref(new Date());
+const selectRules = ref([
+  value => !!value || 'Required.',
+]);
 
 
 document.getElementsByClassName("dp__action dp__select").innerHTML = "Save";

@@ -18,7 +18,7 @@
           </v-btn>
         </template>
       </v-snackbar>
-      <v-row v-for="(booking, index) in bookings" :key="booking" class="d-flex justify-center align-center row-underline">
+      <!-- <v-row v-for="(booking, index) in bookings" :key="booking" class="d-flex justify-center align-center row-underline">
           <v-col cols="2" >
             <p class="p-black" > {{index+1}} </p>
           </v-col>
@@ -39,7 +39,31 @@
             <router-link :to="'/edit/' + booking.id" class="me-3"> Edit </router-link>
             <a class="delete-button" @click="firebaseDeleteSingleItem(booking.id)"> Delete </a>
 
+          </v-col> 
+      </v-row>-->
+
+        <v-row v-for="(booking, index) in bookings" :key="booking" class="d-flex justify-center align-center row-underline">
+          <v-col cols="2" >
+            <p class="p-black" > {{index+1}} </p>
           </v-col>
+          <v-col cols="2">
+            <p class="p-black"> {{booking.status}}</p> 
+          </v-col>
+          <v-col cols="2">
+            <p class="p-black" > {{booking.bookingdetails.type}}</p> 
+          </v-col>
+          <v-col cols="2">
+            <p class="p-black" > {{booking.clientdetails.firstname}} {{booking.clientdetails.lastname}} </p> 
+          </v-col>
+          <v-col cols="2">
+            <p class="p-black me-4 "> {{booking.bookingdetails.datetime.toDate().toDateString()}} </p> 
+          </v-col>
+          <v-col cols="2">
+            <router-link :to="'/view/' + booking.id" class="me-3"> View </router-link>
+            <router-link :to="'/edit/' + booking.id" class="me-3"> Edit </router-link>
+            <a class="delete-button" @click="firebaseDeleteSingleItem(booking.id)"> Delete </a>
+
+          </v-col> 
       </v-row>
       
   </div>
@@ -52,18 +76,21 @@ import useBookings from '../modules/useBookings'
 
 const multiLine = ref(true)
 
-const { bookings, 
-        getBookingsData,
-    firebaseDeleteSingleItem,
-    snackbar
+const { 
+        snackbar,
+      getBookingsData,
+      bookings,
+      firebaseDeleteSingleItem
       } = useBookings()
+
 
 
 onMounted(() => {
   getBookingsData();
+  // getFilteredBookings()
 })
 
-
+console.log("bookings: ",bookings)
 
 </script>
 
